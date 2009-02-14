@@ -1,0 +1,16 @@
+History.txt
+Manifest.txt
+PostInstall.txt
+README.rdoc
+Rakefile
+lib/qresource.rb
+lib/qresource/base.rb
+lib/qresource/qlib.rb
+script/console
+script/destroy
+script/generate
+spec/qresource_spec.rb
+spec/qsample.rb
+spec/spec.opts
+spec/spec_helper.rb
+tasks/rspec.rake
