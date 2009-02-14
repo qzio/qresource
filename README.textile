@@ -4,21 +4,21 @@ qresource is very much a work-in-progress. as of 0.0.1 it only supports GET's
 
 sample usage:
 
-<code>
-class Qsample < Qresource::Base
-  attr_accessor :test
+*code* 
 
-  def initialize( *args ) # {{{
-    p = args.first
-    p.symbolize_keys!
-    unless p[:login].blank?
-      @login = p[:login]
-      @password = p[:password]
-      @api_url = p[:api_url]
-      return
-    end 
-    @test = p[:test]
-  end # }}}
+	class Qsample < Qresource::Base
+	  attr_accessor :test
 
-end
-</code>
+	  def initialize( *args ) # {{{
+		 p = args.first
+		 p.symbolize_keys!
+		 unless p[:login].blank?
+			@login = p[:login]
+			@password = p[:password]
+			@api_url = p[:api_url]
+			return
+		 end 
+		 @test = p[:test]
+	  end # }}}
+
+	end
