@@ -2,10 +2,12 @@ History.txt
 Manifest.txt
 PostInstall.txt
 README.rdoc
+README.textile
 Rakefile
 lib/qresource.rb
 lib/qresource/base.rb
 lib/qresource/qlib.rb
+log/qresource.log
 script/console
 script/destroy
 script/generate

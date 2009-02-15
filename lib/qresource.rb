@@ -7,7 +7,7 @@ require 'extlib'
 require 'rest_client'
 
 module Qresource
-  VERSION = '0.0.1'
+  VERSION = '0.0.2'
 end
 require File.dirname(__FILE__)+'/qresource/qlib.rb'
 require File.dirname(__FILE__)+'/qresource/base.rb'

@@ -26,6 +26,22 @@ describe "Qresource specs" do
     it "should get a qsample object" do
       sample = @qsample.get(1)
       sample.test.should == 'sample string'
+      sample.api_html_link.should == 'http://login:password@gottfolk.se/qresource/qsamples/1'
+    end
+  end
+  describe "client without username/pass" do
+    it "should also get single resource" do
+      qsample = Qsample.new( :api_url => 'http://gottfolk.se/qresource')
+      sample = qsample.get(1)
+      sample.test.should == 'sample string'
+      sample.api_html_link.should == 'http://gottfolk.se/qresource/qsamples/1'
+    end
+
+    it "should handle resource_name with trailing slash" do
+      qsample = Qsample.new( :api_url => 'http://gottfolk.se/qresource/')
+      sample = qsample.get(1)
+      sample.test.should == 'sample string'
+      sample.api_html_link.should == 'http://gottfolk.se/qresource/qsamples/1'
     end
   end
 end

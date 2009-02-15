@@ -6,19 +6,17 @@ sample usage:
 
 *code* 
 
+	<pre>
 	class Qsample < Qresource::Base
 	  attr_accessor :test
-
-	  def initialize( *args ) # {{{
-		 p = args.first
-		 p.symbolize_keys!
-		 unless p[:login].blank?
-			@login = p[:login]
-			@password = p[:password]
-			@api_url = p[:api_url]
-			return
-		 end 
-		 @test = p[:test]
-	  end # }}}
-
 	end
+	@sample_client = Qsample.new :api_url => 'http://gottfolk.se/qresource'
+	@samples = @sample_client.all
+	@first_sample = @sample_client.get(1)
+	@first_sample.test
+	# => "sample string" 
+	</pr>
+
+
+Base uses Hash.from_xml which can be quite... not so fast. but just override
+the from_xml method, it takes one argument which is the libxml node.

@@ -2,10 +2,15 @@ module Qresource
   class Base
     attr_accessor :login, :password, :api_url, :id 
 
+    def initialize( params = {} ) #{{{
+      if !params.nil? && !params.empty?
+        params.keys.each {|name| instance_variable_set "@#{name}", params[name] }
+      end
+    end # }}}
+
     def get(id) # {{{
       doc = fetch( "#{resource_name.pluralize}/#{id}" )
-      result = from_xml(doc)
-      return result 
+      from_xml(doc)
     end # }}}
 
     def all(params = {}) # {{{
@@ -14,7 +19,7 @@ module Qresource
       doc.find("//#{resource_name.pluralize}/#{resource_name}").each do |c|
         res << from_xml(c)
       end
-      return res
+      res
     end # }}}
 
     def fetch(resource, params = {}) # {{{
@@ -26,20 +31,19 @@ module Qresource
         response = rc[resource].get
         get_parsed(response)
       rescue
-        puts "raised exception in fetch #{$!}"
-        puts "response: #{response}"
-        get_parsed('exception')
+        # TODO raise an exception here or something atleast!
+        nil
       end
     end # }}}
 
     def get_parsed(xml_str) # {{{
-      xml_str = '<?xml version="1.0" encoding="UTF-8"?><error><message>fetch failed</message></error>' if xml_str == 'exception'
       begin
         p = XML::Parser.new
         p.string = xml_str
         p.parse
       rescue
-        puts "raised exception in get_parsed #{$!}"
+        # TODO raise exception here!
+        nil
       end
     end # }}}
 
@@ -53,21 +57,23 @@ module Qresource
     end # }}}
 
     def api_with_login # {{{
+      login_string = (login.blank?) ? "" : "#{login}:#{password}@"
       if api_url =~ /^https/
-        api_url.gsub('https://',"https://#{login}:#{password}@")
+        api_url.gsub('https://',"https://#{login_string}")
       else
-        api_url.gsub('http://',"http://#{login}:#{password}@")
+        api_url.gsub('http://',"http://#{login_string}")
       end
     end # }}}
 
-    def api_link # {{{
-      "#{api_with_login}/#{resource}/#{id}"
+    def api_html_link # {{{
+      "#{api_with_login.chomp('/')}/#{resource_name.pluralize}/#{id}"
     end # }}}
 
     def resource_name # {{{
       self.class.to_s.downcase
     end # }}}
 
+    # these are just for my personal projects :) dont use'em if you dont want to
     def self.log(message) # {{{
       return nil if message.nil?
       File.open("log/#{self.class.to_s.downcase}.log",'a') do |f|
