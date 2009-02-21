@@ -4,10 +4,13 @@ PostInstall.txt
 README.rdoc
 README.textile
 Rakefile
+TODO
 lib/qresource.rb
-lib/qresource/base.rb
+lib/qresource/associations.rb
 lib/qresource/qlib.rb
+lib/qresource/qresource.rb
 log/qresource.log
+qresource.gemspec
 script/console
 script/destroy
 script/generate

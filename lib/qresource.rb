@@ -10,4 +10,5 @@ module Qresource
   VERSION = '0.0.2'
 end
 require File.dirname(__FILE__)+'/qresource/qlib.rb'
-require File.dirname(__FILE__)+'/qresource/base.rb'
+require File.dirname(__FILE__)+'/qresource/qresource.rb'
+require File.dirname(__FILE__)+'/qresource/associations.rb'
