@@ -1,12 +1,13 @@
 == qresource
 
-qresource is very much a work-in-progress. as of 0.0.1 it only supports GET's
+qresource is very much a work-in-progress. as of 0.0.3 it only supports GET's
 
 sample usage:
 
 *code* 
 
 	<pre>
+
 	class Qsample < Qresource::Base
 	  attr_accessor :test
 	end
@@ -15,7 +16,8 @@ sample usage:
 	@first_sample = @sample_client.get(1)
 	@first_sample.test
 	# => "sample string" 
-	</pr>
+
+	</pre>
 
 
 Base uses Hash.from_xml which can be quite... not so fast. but just override

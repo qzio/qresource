@@ -6,10 +6,11 @@ README.textile
 Rakefile
 TODO
 lib/qresource.rb
-lib/qresource/associations.rb
+lib/qresource/qexception.rb
 lib/qresource/qlib.rb
 lib/qresource/qresource.rb
-log/qresource.log
+log/
+log/
 qresource.gemspec
 script/console
 script/destroy

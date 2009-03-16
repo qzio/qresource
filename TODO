@@ -1,5 +1,2 @@
-* add better error handling, really need exceptions.rb
-* has_many thing would be soo nice. I need this one
 * varius cleanups and other smart things, hey I'm new to ruby! :)
 * the rest of the HTTP verbs.
-
