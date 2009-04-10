@@ -1,4 +1,5 @@
 module Qresource
+  @@_timeout = 40
   attr_accessor :_login, :_password, :_api_url, :id 
 
   def initialize( params = {} ) #{{{
@@ -31,11 +32,12 @@ module Qresource
   def fetch(resource, params = {}) # {{{
     raise Qexception, "no api_url(#{@_api_url})" if _api_url.blank?
     params = {} if params.nil? || params.empty?
-    rc = RestClient::Resource.new(_api_url, :user => _login, :password => _password)
+    #rc = RestClient::Resource.new(_api_url, :user => _login, :password => _password)
     resource = "#{resource}.xml"
-    resource = "#{resource}?#{params.to_param}" unless params.empty?
+    resource = "#{resource}?#{params.to_params}" unless params.empty?
     begin
-      response = rc[resource].get
+      #response = rc[resource].get
+      response = _restclient[resource].get
     rescue
       # TODO raise an exception here or something atleast!
       raise Qexception, "response failed #{$!} when fetching #{resource}"
@@ -85,25 +87,31 @@ module Qresource
   end # }}}
 
   module ClassMethods
-    @@logger = Logger.new("log/#{self.to_s.downcase}.log")
-    def get_parser( xml_str ) # {{{
+    @@logger = Logger.new("log/qresource.log")
+    def get_parser( xml_str )
       begin
-        p = XML::Parser.new
-        p.string = xml_str
+				p = XML::Parser.string( xml_str )
         p.parse
       rescue
         # TODO raise exception here!
         raise Qexception, "unable to parse xml_str #{$!}"
       end
-    end # }}}
+    end
 
-    def logger # {{{
+    def logger
       return @@logger unless @@logger.nil?
-      @@logger = Logger.new("log/#{self.to_s.downcase}.log")
+      @@logger = Logger.new("log/qresource.log")
       @@logger.level = Logger::INFO
       return @@logger
-    end  # }}} 
+    end
+    def logger=(logger_object)
+      @@logger = logger_object 
+    end
 
+  end
+
+  def _restclient
+    @_restclient ||= RestClient::Resource.new(_api_url, :user => _login, :password => _password, :timeout => @@_timeout)
   end
 
 end

@@ -1,4 +1,4 @@
 module Qresource
-  class Qexception < RuntimeError
+  class Qexception < StandardError 
   end
 end

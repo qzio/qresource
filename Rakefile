@@ -13,7 +13,7 @@ $hoe = Hoe.new('qresource', Qresource::VERSION) do |p|
   # ]
   p.extra_deps = [
     ['extlib', '>= 0.9'],
-    ['libxml-ruby', '>= 0.8'],
+    ['libxml-ruby', '>= 1.1.2'],
     ['rest-client','>= 0.9'],
   ]
   p.extra_dev_deps = [
