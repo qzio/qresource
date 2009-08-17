@@ -13,23 +13,23 @@ module Qresource
     if !params.nil? && !params.empty?
       params.keys.each {|name| instance_variable_set "@#{name}", params[name] }
     end
-  end # }}}
+  end 
 
-  def get(id) # {{{
+  def get(id) 
     doc = fetch( "/#{resource_name.pluralize}/#{id}" )
     from_xml(doc)
-  end # }}}
+  end 
 
-  def all(params = {}) # {{{
+  def all(params = {}) 
     res = []
     doc = fetch( "/#{resource_name.pluralize}", params )
     doc.find("//#{resource_name.pluralize}/#{resource_name}").each do |c|
       res << from_xml(c)
     end
     res
-  end # }}}
+  end 
 
-  def fetch(resource, params = {}) # {{{
+  def fetch(resource, params = {}) 
     raise Qexception, "no api_url(#{@_api_url})" if _api_url.blank?
     params = {} if params.nil? || params.empty?
     #rc = RestClient::Resource.new(_api_url, :user => _login, :password => _password)
@@ -43,48 +43,48 @@ module Qresource
       raise Qexception, "response failed #{$!} when fetching #{resource}"
     end
     get_parser(response)
-  end # }}}
+  end 
 
-  def from_xml(doc) # {{{
+  def from_xml(doc) 
     klass = self.class
     new_object = klass.new Hash.from_xml( doc.to_s )[resource_name]
     new_object._api_url = _api_url
     new_object._login = _login
     new_object._password = _password
     return new_object
-  end # }}}
+  end 
 
-  def api_with_login # {{{
+  def api_with_login 
     login_string = (_login.blank?) ? "" : "#{_login}:#{_password}@"
     if _api_url =~ /^https/
       _api_url.gsub('https://',"https://#{login_string}")
     else
       _api_url.gsub('http://',"http://#{login_string}")
     end
-  end # }}}
+  end 
 
-  def api_html_link # {{{
+  def api_html_link 
     "#{api_with_login.chomp('/')}/#{resource_name.pluralize}/#{id}"
-  end # }}}
+  end 
 
-  def resource_name # {{{
+  def resource_name 
     self.class.to_s.downcase
-  end # }}}
+  end 
 
   # these are just aliases for the singleton methods
-  def logger # {{{
+  def logger 
     klass = self.class
     klass.logger
-  end # }}}
+  end 
 
-  def get_parser(xml_str) # {{{
+  def get_parser(xml_str) 
     klass = self.class
     klass.get_parser(xml_str)
-  end # }}}
+  end 
 
-  def self.included(base) # {{{
+  def self.included(base) 
     base.extend ClassMethods
-  end # }}}
+  end 
 
   module ClassMethods
     @@logger = Logger.new("log/qresource.log")

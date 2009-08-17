@@ -8,7 +8,6 @@ TODO
 lib/qresource.rb
 lib/qresource/qexception.rb
 lib/qresource/qresource.rb
-qresource.gemspec
 script/console
 script/destroy
 script/generate
