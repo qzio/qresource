@@ -9,7 +9,7 @@ require 'rest_client'
 require 'logger'
 
 module Qresource
-  VERSION = '0.0.3'
+  VERSION = '0.0.4'
 end
 require File.dirname(__FILE__)+'/qresource/qresource.rb'
 require File.dirname(__FILE__)+'/qresource/qexception.rb'
