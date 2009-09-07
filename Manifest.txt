@@ -6,6 +6,8 @@ README.textile
 Rakefile
 TODO
 lib/qresource.rb
+lib/qresource/hash_helper.rb
+lib/qresource/mini_helpers.rb
 lib/qresource/qexception.rb
 lib/qresource/qresource.rb
 qresource.gemspec

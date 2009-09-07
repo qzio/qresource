@@ -16,21 +16,21 @@ module Qresource
   end 
 
   def get(id) 
-    doc = fetch( "/#{resource_name.pluralize}/#{id}" )
+    doc = fetch( "/#{resource_name_pluralized}/#{id}" )
     from_xml(doc)
   end 
 
   def all(params = {}) 
     res = []
-    doc = fetch( "/#{resource_name.pluralize}", params )
-    doc.find("//#{resource_name.pluralize}/#{resource_name}").each do |c|
+    doc = fetch( "/#{resource_name_pluralized}", params )
+    doc.find("//#{resource_name_pluralized}/#{resource_name}").each do |c|
       res << from_xml(c)
     end
     res
   end 
 
   def fetch(resource, params = {}) 
-    raise Qexception, "no api_url(#{@_api_url})" if _api_url.blank?
+    raise Qexception, "no api_url(#{@_api_url}) #{_api_url.blank?}" if _api_url.blank?
     params = {} if params.nil? || params.empty?
     #rc = RestClient::Resource.new(_api_url, :user => _login, :password => _password)
     resource = "#{resource}.xml"
@@ -64,12 +64,16 @@ module Qresource
   end 
 
   def api_html_link 
-    "#{api_with_login.chomp('/')}/#{resource_name.pluralize}/#{id}"
+    "#{api_with_login.chomp('/')}/#{resource_name_pluralized}/#{id}"
   end 
 
   def resource_name 
     self.class.to_s.downcase
   end 
+
+  def resource_name_pluralized
+    return (resource_name.respond_to? :pluralize) ? resouce_name.pluralize : resource_name+'s'
+  end
 
   # these are just aliases for the singleton methods
   def logger 

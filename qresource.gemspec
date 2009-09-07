@@ -2,15 +2,15 @@
 
 Gem::Specification.new do |s|
   s.name = %q{qresource}
-  s.version = "0.0.4"
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["joel hansson"]
-  s.date = %q{2009-08-18}
+  s.date = %q{2009-09-07}
   s.description = %q{FIX (describe your package)}
   s.email = ["joel.hansson@gmail.com"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "PostInstall.txt", "README.rdoc"]
-  s.files = ["History.txt", "Manifest.txt", "PostInstall.txt", "README.rdoc", "README.textile", "Rakefile", "TODO", "lib/qresource.rb", "lib/qresource/qexception.rb", "lib/qresource/qresource.rb", "qresource.gemspec", "script/console", "script/destroy", "script/generate", "spec/qresource_spec.rb", "spec/qsample.rb", "spec/spec.opts", "spec/spec_helper.rb", "tasks/rspec.rake"]
+  s.files = ["History.txt", "Manifest.txt", "PostInstall.txt", "README.rdoc", "README.textile", "Rakefile", "TODO", "lib/qresource.rb", "lib/qresource/hash_helper.rb", "lib/qresource/mini_helpers.rb", "lib/qresource/qexception.rb", "lib/qresource/qresource.rb", "qresource.gemspec", "script/console", "script/destroy", "script/generate", "spec/qresource_spec.rb", "spec/qsample.rb", "spec/spec.opts", "spec/spec_helper.rb", "tasks/rspec.rake"]
   s.has_rdoc = true
   s.homepage = %q{FIX (url)}
   s.rdoc_options = ["--main", "README.rdoc"]
