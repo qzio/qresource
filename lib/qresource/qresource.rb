@@ -72,7 +72,7 @@ module Qresource
   end 
 
   def resource_name_pluralized
-    return (resource_name.respond_to? :pluralize) ? resouce_name.pluralize : resource_name+'s'
+    return (resource_name.respond_to? :pluralize) ? resource_name.pluralize : resource_name+'s'
   end
 
   # these are just aliases for the singleton methods

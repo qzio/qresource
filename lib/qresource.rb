@@ -9,7 +9,7 @@ require 'rest_client'
 require 'logger'
 
 module Qresource
-  VERSION = '0.0.5'
+  VERSION = '0.0.6'
 end
 
 require File.dirname(__FILE__)+'/qresource/mini_helpers.rb'

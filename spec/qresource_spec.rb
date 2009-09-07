@@ -16,6 +16,10 @@ describe "Qresource specs" do
       :_password => @password 
     )
   end
+  it "should have correct name" do
+    @qsample.resource_name.should eql 'qsample'
+    @qsample.resource_name_pluralized.should eql 'qsamples'
+  end
   describe "get list" do
     it "should get qsample list" do
       samples = @qsample.all
