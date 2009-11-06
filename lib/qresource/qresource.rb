@@ -1,5 +1,5 @@
 module Qresource
-  @@_timeout = 40
+  @@_timeout = 120
   attr_accessor :_login, :_password, :_api_url, :id 
 
   def initialize( params = {} ) #{{{
@@ -32,14 +32,11 @@ module Qresource
   def fetch(resource, params = {}) 
     raise Qexception, "no api_url(#{@_api_url}) #{_api_url.blank?}" if _api_url.blank?
     params = {} if params.nil? || params.empty?
-    #rc = RestClient::Resource.new(_api_url, :user => _login, :password => _password)
     resource = "#{resource}.xml"
     resource = "#{resource}?#{params.to_params}" unless params.empty?
     begin
-      #response = rc[resource].get
       response = _restclient[resource].get
     rescue
-      # TODO raise an exception here or something atleast!
       raise Qexception, "response failed #{$!} when fetching #{resource}"
     end
     get_parser(response)
